@@ -1,10 +1,15 @@
 import React from 'react';
 import './App.css';
+import Card from '../features/cards/Card';
+
+import cardSource from '../data/assets/card-image.jpg';
+
+// const cardSource = '../data/assets/card-image.jpg';
 
 function App() {
   return (
     <div className="App">
-      <p>Hello World</p>
+      <Card image={cardSource}/>
     </div>
   );
 }
