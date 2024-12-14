@@ -8,7 +8,7 @@ import Login from '../features/user/Login';
 import cardMedia from '../data/assets/card-image.jpg';
 import profilePic from '../data/assets/morty.jpg';
 
-// const cardSource = '../data/assets/card-image.jpg';
+
 
 function App() {
   
