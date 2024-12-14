@@ -18,8 +18,8 @@ code {
   flex-direction: column;
   border: 1px solid #b1b1b1;
   border-radius: 5px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: rgb(208, 212, 214);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  background-color: rgb(116, 103, 86);
 }
 
 .card-header {
@@ -27,7 +27,7 @@ code {
   justify-content: space-between;
   align-items: center;
   max-height: 10%;
-  border-bottom: 2px solid #383838;
+  border-bottom: 2px solid #4b4b4b;
 } 
 
 .avatar img {
@@ -56,8 +56,14 @@ code {
 
 .card-text {
   display: flex;
-
+  justify-content: flex-start;
   text-justify: left;
+}
+
+.card-text p {
+  margin: 10px;
+  text-align: left;
+  color: rgb(176, 180, 184);
 }
 
 .like-buttons {
