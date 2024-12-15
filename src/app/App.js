@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isAuthenticated } from '../features/user/userSlice';
 import './App.css';
@@ -16,33 +16,41 @@ const DURATION = 'temporary';
 const SCOPE_STRING = 'read';
 const RESPONSE_TYPE = 'code';
 const AUTHENDPOINT = 'https://www.reddit.com/api/v1/authorize';
+
 const userAuthorizationRedirect = 
-  `${AUTHENDPOINT}
-  ?client_id=${CLIENTID}
-  &response_type=${RESPONSE_TYPE}
-  &state=${URLSTATE}
-  &redirect_uri=${REDIRECTURI}
-  &duration=${DURATION}
-  &scope=${SCOPE_STRING}`;
+`${AUTHENDPOINT}
+?client_id=${CLIENTID}
+&response_type=${RESPONSE_TYPE}
+&state=${URLSTATE}
+&redirect_uri=${REDIRECTURI}
+&duration=${DURATION}
+&scope=${SCOPE_STRING}`;
 
 
 
 
 function App() {
   
-  const [authToken, setAuthToken] = useState(null);
-  const [authCode, setAuthCode] = useState(null);
   const authenticated = useSelector(isAuthenticated);
 
+  localStorage.setItem('code', '');
+
   useEffect(() => {
-
-    if (!authCode) {
-      window.location.href = userAuthorizationRedirect;
-      //setAuthCode(new URLSearchParams(window.location.search).get('code'));
-    }
-
-  }, [authenticated]);
+    
+    const querySring = window.location.search;
   
+    // check to see if we're in the callback URL and if so, get the code
+    if (querySring.includes('code')) {
+      localStorage.setItem('code', (new URLSearchParams(window.location.search).get('code')));
+
+    } else if (localStorage.getItem('code') === '') {
+      window.location.href = userAuthorizationRedirect;
+    }  
+    
+    
+
+  }, []);
+
   if (!authenticated) {
 
     return (
