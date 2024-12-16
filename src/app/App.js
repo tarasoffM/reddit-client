@@ -10,10 +10,11 @@ import cardMedia from '../data/assets/card-image.jpg';
 import profilePic from '../data/assets/morty.jpg';
 
 
-const CLIENTID = 'Tt3lGeSNEQInQgOBGMiQxQ';
+const clientID = 'Tt3lGeSNEQInQgOBGMiQxQ';
+const clientSecret = 'eJL9vNd0AoOqORX9oJ4yVjr4ibaWkA';
 // will need to change this to a more secure method
 const URLSTATE = 'SomeRandomString';
-const REDIRECTURI = 'http://localhost:3000/';
+const REDIRECTURI = 'http://localhost:3000';
 const DURATION = 'temporary';
 const SCOPE_STRING = 'read';
 const RESPONSE_TYPE = 'code';
@@ -21,7 +22,7 @@ const AUTHENDPOINT = 'https://www.reddit.com/api/v1/authorize';
 
 const userAuthorizationRedirect = 
 `${AUTHENDPOINT}
-?client_id=${CLIENTID}
+?client_id=${clientID}
 &response_type=${RESPONSE_TYPE}
 &state=${URLSTATE}
 &redirect_uri=${REDIRECTURI}
@@ -36,28 +37,52 @@ function App() {
   const authenticated = useSelector(isAuthenticated);
   const dispatch = useDispatch();
 
-  //localStorage.setItem('code', '');
 
   useEffect(() => {
-    
-    const querySring = window.location.search;
-  
-    // check to see if we're in the callback URL and if so, get the code
-    if (querySring.includes('code')) {
-      localStorage.setItem('code', (new URLSearchParams(window.location.search).get('code')));
-    // check to see if we have a code, if not, redirect to the login page
-    } else if (localStorage.getItem('code') === '') {
-      window.location.href = userAuthorizationRedirect;
-    }  
-    
-    // check to see if we have a token, if not, get one
-    if (!localStorage.getItem('token')) {
-      dispatch(getAccessToken(localStorage.getItem('code')));
+    const queryString = window.location.search;
+    const credentials = btoa(`${clientID}:${clientSecret}`);
+    let code = new URLSearchParams(queryString).get('code');
+
+    if (code) {
+      localStorage.setItem('code', code);
+      // remove the code from the URL
+      window.history.pushState('', '', REDIRECTURI);
+    } else {
+      code = localStorage.getItem('code');
     }
 
-  }, []);
+    if (code) {
+      // Exchange the code for an access token
+      fetch('https://www.reddit.com/api/v1/access_token', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${credentials}`
+        },
+        body: new URLSearchParams({
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: REDIRECTURI
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        localStorage.setItem('token', data.access_token);
+        //dispatch(getAccessToken(data.access_token));
+      })
+      .catch(error => {
+        console.error('Error fetching access token:', error);
+      });
+    } else {
+      window.location.href = userAuthorizationRedirect;
+    }
+  }, [dispatch]);
 
-  if (!authenticated) {
+  if (!localStorage.getItem('token')) {
 
     return (
       <Login />
@@ -74,3 +99,4 @@ function App() {
 }
 
 export default App;
+

@@ -9,21 +9,27 @@ const clientSecret = 'eJL9vNd0AoOqORX9oJ4yVjr4ibaWkA';
 export const getAccessToken = createAsyncThunk(
     'user/getAccessToken',
     async (code) => {
-        const credentials = btoa(`${clientID}:${clientSecret}`).toString('base64');
+        const credentials = btoa(`${clientID}:${clientSecret}`);
         const response = await fetch('https://www.reddit.com/api/v1/access_token', {
             method: 'POST',
             headers: {
-                Authorization: `Basic ${credentials}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Basic ${credentials}`,
             },
-            body:   `grant_type=authorization_code&` +
-                    `code=${code}&` +
-                    `redirect_uri=http://localhost:3000/`,
+            body: new URLSearchParams({
+                grant_type: 'authorization_code',
+                code: code,
+                redirect_uri: 'http://localhost:3000/',
+            }),
+        });
 
-        })
+        if (!response.ok) {
+            throw new Error('Failed to fetch access token');
+        }
+
         return response.json();
     }
-);
-        
+);   
 
 
 export const userSlice = createSlice({
