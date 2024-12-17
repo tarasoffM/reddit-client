@@ -1,15 +1,26 @@
-import { React, use } from 'react';
+import { React, useEffect } from 'react';
 import Card from './Card';
-import { useSelector } from 'react-redux';
-import { selectCards } from './cardsSlice'; 
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCards, getCards } from './cardsSlice'; 
+import { isAuthenticated } from '../user/userSlice';
 
-export const Cards = () => {
+export default function Cards () {
     
-    const getCards = useSelector(selectCards);
+    const dispatch = useDispatch();
+    const cardArray = useSelector(selectCards);
+    const authenticated = useSelector(isAuthenticated);
 
-    getCards.map((card, index) => {
-        return (
-            <Card cardMedia={card.data.url} profilePic={card.data.thumbnail} index={index}/>
-        );
-    });
+    useEffect(() => {
+        dispatch(getCards());
+    }, [authenticated, dispatch]);
+
+    
+    return (
+        <>
+            {cardArray.map((item, index) => (
+                <Card key={index} cardMedia={item.data.url} profilePic={item.data.thumbnail} cardTitle={item.data.title} />
+            ))}
+        </>    
+    );
+    
 }

@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 
 const USERNAME = 'PrudentDiscussion894';
-const clientID = 'Tt3lGeSNEQInQgOBGMiQxQ';
-const clientSecret = 'eJL9vNd0AoOqORX9oJ4yVjr4ibaWkA';
+const clientID = process.env.REACT_APP_CLIENT_ID;
+const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
 
 
 export const getAccessToken = createAsyncThunk(
@@ -38,6 +38,11 @@ export const userSlice = createSlice({
         profile: {},
         authenticated: false,
     },
+    reducers: {
+        setAuthenticated: (state, action) => {
+            state.authenticated = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getAccessToken.pending, (state) => {
@@ -58,5 +63,6 @@ export const userSlice = createSlice({
 
 export const isAuthenticated = (state) => state.user.authenticated;
 
+export const { setAuthenticated } = userSlice.actions;
 
 export default userSlice.reducer;

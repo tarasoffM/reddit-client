@@ -1,9 +1,9 @@
 import React, { use, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { isAuthenticated } from '../features/user/userSlice';
+import { isAuthenticated, setAuthenticated } from '../features/user/userSlice';
 import { getCards } from '../features/cards/cardsSlice';
 import './App.css';
-import Cards from '../features/cards/Card';
+import Cards from '../features/cards/Cards';
 import Login from '../features/user/Login';
 
 import cardMedia from '../data/assets/card-image.jpg';
@@ -72,7 +72,7 @@ function App() {
       })
       .then(data => {
         localStorage.setItem('token', data.access_token);
-        //dispatch(getAccessToken(data.access_token));
+        dispatch(setAuthenticated(true));
       })
       .catch(error => {
         console.error('Error fetching access token:', error);

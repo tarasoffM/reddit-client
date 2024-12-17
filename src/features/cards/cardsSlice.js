@@ -26,6 +26,15 @@ export const cardsSlice = createSlice({
                             title: 'Card Title',
                             url: 'https://via.placeholder.com/300',
                             thumbnail: 'https://via.placeholder.com/150',
+                            preview: {
+                                images: [
+                                    {
+                                        source: {
+                                            url: 'https://via.placeholder.com/300'
+                                        }
+                                    }
+                                ]
+                            }
                         }
                     }
                 ]
