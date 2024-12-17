@@ -41,7 +41,7 @@ export const cardsSlice = createSlice({
                         url: card.data.url ? card.data.url : '', 
                         thumbnail: card.data.thumbnail ? card.data.thumbnail : '', 
                         preview: card.data.preview ? card.data.preview : ''};
-                    state.cards = { ...state.cards, entry};
+                    state.cards = { ...state.cards, ...entry};
                 });
                 //state.cards = action.payload;
             });
