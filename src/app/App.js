@@ -1,10 +1,10 @@
 import React, { use, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isAuthenticated } from '../features/user/userSlice';
+import { getCards } from '../features/cards/cardsSlice';
 import './App.css';
 import Card from '../features/cards/Card';
 import Login from '../features/user/Login';
-import { getAccessToken } from '../features/user/userSlice';
 
 import cardMedia from '../data/assets/card-image.jpg';
 import profilePic from '../data/assets/morty.jpg';
@@ -80,6 +80,7 @@ function App() {
     } else {
       window.location.href = userAuthorizationRedirect;
     }
+      
   }, [dispatch]);
 
   if (!localStorage.getItem('token')) {

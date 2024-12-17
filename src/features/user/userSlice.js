@@ -29,7 +29,7 @@ export const getAccessToken = createAsyncThunk(
 
         return response.json();
     }
-);   
+);
 
 
 export const userSlice = createSlice({
