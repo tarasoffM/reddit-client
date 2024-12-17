@@ -18,28 +18,7 @@ export const getCards = createAsyncThunk(
 export const cardsSlice = createSlice({
     name: 'cards',
     initialState: {
-        cards: {
-            data: {
-                children: [
-                    {
-                        data: {
-                            title: 'Card Title',
-                            url: 'https://via.placeholder.com/300',
-                            thumbnail: 'https://via.placeholder.com/150',
-                            preview: {
-                                images: [
-                                    {
-                                        source: {
-                                            url: 'https://via.placeholder.com/300'
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                ]
-            }
-        },
+        cards: {},
         isLoading: false,
         loadError: false,
     },
@@ -56,13 +35,19 @@ export const cardsSlice = createSlice({
             .addCase(getCards.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.loadError = false;
-                state.cards = action.payload;
+                action.payload.data.children.map((card) => {
+                    const entry = { 
+                        title: card.data.title ? card.data.title : '', 
+                        url: card.data.url ? card.data.url : '', 
+                        thumbnail: card.data.thumbnail ? card.data.thumbnail : '', 
+                        preview: card.data.preview ? card.data.preview : ''};
+                    state.cards = { ...state.cards, entry};
+                });
+                //state.cards = action.payload;
             });
     }
 });
 
 export default cardsSlice.reducer;
-export const selectTitle = (state) => state.cards.cards.data.children[0].data.title;
-export const selectImage = (state) => state.cards.cards.data.children[0].data.url;
-export const selectThumbnail = (state) => state.cards.cards.data.children[0].data.thumbnail;
-export const selectCards = (state) => state.cards.cards.data.children;
+
+export const selectCards = (state) => state.cards.cards;

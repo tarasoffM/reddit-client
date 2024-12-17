@@ -1,7 +1,7 @@
 import { React, useEffect } from 'react';
 import Card from './Card';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCards, getCards } from './cardsSlice'; 
+import { getCards, selectCards } from './cardsSlice'; 
 import { isAuthenticated } from '../user/userSlice';
 
 export default function Cards () {
@@ -14,7 +14,7 @@ export default function Cards () {
         dispatch(getCards());
     }, [authenticated, dispatch]);
 
-    
+   /*
     return (
         <>
             {cardArray.map((item, index) => (
@@ -22,5 +22,5 @@ export default function Cards () {
             ))}
         </>    
     );
-    
+    */
 }
