@@ -12,15 +12,22 @@ export default function Cards () {
 
     useEffect(() => {
         dispatch(getCards());
-    }, [authenticated, dispatch]);
+    }, [dispatch]);
 
-   /*
+   
     return (
         <>
-            {cardArray.map((item, index) => (
-                <Card key={index} cardMedia={item.data.url} profilePic={item.data.thumbnail} cardTitle={item.data.title} />
-            ))}
+            {cardArray.map((card, index) => {
+                const imageUrl = card.url ? card.url : card.thumbnail;
+                return (
+                <Card 
+                key={index} 
+                cardMedia={imageUrl} 
+                profilePic={card.thumbnail} 
+                cardTitle={card.title} 
+                /> );
+    })}
         </>    
     );
-    */
+    
 }
