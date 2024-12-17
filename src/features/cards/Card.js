@@ -14,7 +14,7 @@ export default function Card({cardMedia, profilePic, cardTitle}) {
             </div>
             <div className='card-container'>
                 <div className='card-meadia'>
-                    <img src={cardMedia} alt='placeholder' />
+                    <img src={cardMedia} alt='placeholder' title={cardMedia}/>
                 </div>
                 <div className='content-buttons'>
                     <button className='like-buttons'>left button</button>

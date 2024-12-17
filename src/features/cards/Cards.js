@@ -14,18 +14,28 @@ export default function Cards () {
         dispatch(getCards());
     }, [dispatch]);
 
+    const getUrl = (url) => {
+        const encoded = url.replace('amp;s', 's');
+        const doubleEncoded = encoded.replace('amp;', '');
+        const tripleEncoded = doubleEncoded.replace('amp;', '');
+        return tripleEncoded;
+    }
+
    
     return (
         <>
             {cardArray.map((card, index) => {
-                const imageUrl = card.url ? card.url : card.thumbnail;
+                const imageUrl = card.preview?.images?.[0]?.source?.url || '';
+                
+
+
                 return (
-                <Card 
-                key={index} 
-                cardMedia={imageUrl} 
-                profilePic={card.thumbnail} 
-                cardTitle={card.title} 
-                /> );
+                    <Card 
+                    key={index} 
+                    cardMedia={getUrl(imageUrl)} 
+                    profilePic={card.thumbnail} 
+                    cardTitle={card.title} 
+                    /> );
     })}
         </>    
     );
