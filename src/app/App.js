@@ -3,18 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { isAuthenticated } from '../features/user/userSlice';
 import { getCards } from '../features/cards/cardsSlice';
 import './App.css';
-import Card from '../features/cards/Card';
+import Cards from '../features/cards/Card';
 import Login from '../features/user/Login';
 
 import cardMedia from '../data/assets/card-image.jpg';
 import profilePic from '../data/assets/morty.jpg';
 
 
-const clientID = 'Tt3lGeSNEQInQgOBGMiQxQ';
-const clientSecret = 'eJL9vNd0AoOqORX9oJ4yVjr4ibaWkA';
+const clientID = process.env.REACT_APP_CLIENT_ID;
+const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+const REDIRECTURI = process.env.REACT_APP_REDIRECT_URI;
 // will need to change this to a more secure method
 const URLSTATE = 'SomeRandomString';
-const REDIRECTURI = 'http://localhost:3000';
 const DURATION = 'temporary';
 const SCOPE_STRING = 'read';
 const RESPONSE_TYPE = 'code';
@@ -93,7 +93,7 @@ function App() {
 
     return (
       <div className="App">
-        <Card cardMedia={cardMedia} profilePic={profilePic} />
+        <Cards />
       </div>
     );
   }

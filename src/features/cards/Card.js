@@ -1,12 +1,17 @@
 import { React } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCards, selectTitle } from './cardsSlice';
+import { getCards, selectTitle, selectImage, selectThumbnail } from './cardsSlice';
 
 export default function Card({cardMedia, profilePic}) {
 
     const dispatch = useDispatch();
-    const cardTitle = useSelector(selectTitle());
-    cardTitle = cardTitle ? cardTitle : 'Card Title';
+    const selectCardTitle = useSelector(selectTitle);
+    const selectCardImage = useSelector(selectImage);
+    const selectCardThumbnail = useSelector(selectThumbnail);
+    const cardThumbnail = selectCardThumbnail ? selectCardThumbnail : profilePic;
+    const cardTitle = selectCardTitle ? selectCardTitle : 'Card Title';
+    const cardImage = selectCardImage ? selectCardImage : cardMedia;
+    
 
     const handleLike = () => {
         dispatch(getCards());
@@ -16,23 +21,20 @@ export default function Card({cardMedia, profilePic}) {
         <div className='card'>
             <div className='card-header'>
                 <div className='avatar'>
-                    <img src={profilePic} alt='placeholder' />
+                    <img src={cardThumbnail} alt='placeholder' />
                 </div>
-                <h2>{cardTitle}</h2>
+                <h2>header</h2>
             </div>
             <div className='card-container'>
                 <div className='card-meadia'>
-                    <img src={cardMedia} alt='placeholder' />
+                    <img src={cardImage} alt='placeholder' />
                 </div>
                 <div className='content-buttons'>
                     <button className='like-buttons' onClick={handleLike}>left button</button>
                     <button className='like-buttons'>right button</button>
                 </div>
                 <div className='card-text'>
-                    <p>Some information about the picture in the content div.  This is just a bunch of words to 
-                        take up space and make the card look like it has some content.  This is just a bunch of words to
-                        take up space and make the card look like it has some content.  This is just a bunch of words to
-                    </p>
+                    <p>{cardTitle}</p>
                 </div>
             </div>
           

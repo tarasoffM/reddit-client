@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux'; 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getCards = createAsyncThunk(
     'cards/getCards',
     async () => {
-        const response = await fetch('https://oauth.reddit.com/best?after=t3_4s7w3v?limit=1', 
+        const response = await fetch('https://oauth.reddit.com/hot?after=t2_1?limit=10', 
             {
                 headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` },   
             }
@@ -19,7 +18,19 @@ export const getCards = createAsyncThunk(
 export const cardsSlice = createSlice({
     name: 'cards',
     initialState: {
-        cards: {},
+        cards: {
+            data: {
+                children: [
+                    {
+                        data: {
+                            title: 'Card Title',
+                            url: 'https://via.placeholder.com/300',
+                            thumbnail: 'https://via.placeholder.com/150',
+                        }
+                    }
+                ]
+            }
+        },
         isLoading: false,
         loadError: false,
     },
@@ -43,3 +54,6 @@ export const cardsSlice = createSlice({
 
 export default cardsSlice.reducer;
 export const selectTitle = (state) => state.cards.cards.data.children[0].data.title;
+export const selectImage = (state) => state.cards.cards.data.children[0].data.url;
+export const selectThumbnail = (state) => state.cards.cards.data.children[0].data.thumbnail;
+export const selectCards = (state) => state.cards.cards.data.children;
