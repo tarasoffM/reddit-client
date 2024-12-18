@@ -43,6 +43,7 @@ export const cardsSlice = createSlice({
                         preview: card.data.preview ? card.data.preview : '',
                         comments: card.data.num_comments ? card.data.num_comments : 0,
                         ups: card.data.ups ? card.data.ups : 0,
+                        author: card.data.author ? card.data.author : '',
                     };
                     //state.cards.push(entry);
                     return entry;

@@ -34,7 +34,8 @@ export default function Cards () {
                     profilePic={card.thumbnail} 
                     cardTitle={card.title}
                     cardComments={card.comments}
-                    cardUps={card.ups} 
+                    cardUps={card.ups}
+                    cardAuthor={card.author} 
                     /> );
     })}
         </>    

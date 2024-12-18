@@ -3,7 +3,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 
-export default function Card({cardMedia, profilePic, cardTitle, cardUps, cardComments}) {
+export default function Card({cardMedia, profilePic, cardTitle, cardUps, cardComments, cardAuthor}) {
 
     if (cardMedia === null) {
         return (
@@ -12,7 +12,8 @@ export default function Card({cardMedia, profilePic, cardTitle, cardUps, cardCom
                 <div className='avatar'>
                     <img src={profilePic} alt='placeholder' />
                 </div>
-                <h2>header</h2>
+                <p>Posted By</p>
+                <h3>{cardAuthor}</h3>
             </div>
             <div className='card-container'>                
                 <div className='content-buttons'>
@@ -38,8 +39,9 @@ export default function Card({cardMedia, profilePic, cardTitle, cardUps, cardCom
             <div className='card-header'>
                 <div className='avatar'>
                     <img src={profilePic} alt='placeholder' />
-                </div>
-                <h2>header</h2>
+                </div>            
+                <p>Posted By</p>
+                <h3>{cardAuthor}</h3>              
             </div>
             <div className='card-container'>
                 <div className='card-meadia'>
