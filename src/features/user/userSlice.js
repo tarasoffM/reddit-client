@@ -18,7 +18,7 @@ export const getAccessToken = createAsyncThunk(
             body: new URLSearchParams({
                 grant_type: 'authorization_code',
                 code: code,
-                redirect_uri: 'http://localhost:3000/',
+                redirect_uri: process.env.REACT_APP_REDIRECT_URI,
             }),
         });
 
