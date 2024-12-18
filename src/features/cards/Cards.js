@@ -32,7 +32,7 @@ export default function Cards () {
                 return (
                     <Card 
                     key={index} 
-                    cardMedia={getUrl(imageUrl)} 
+                    cardMedia={getUrl(imageUrl) ? getUrl(imageUrl) : null} 
                     profilePic={card.thumbnail} 
                     cardTitle={card.title} 
                     /> );

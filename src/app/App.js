@@ -1,13 +1,12 @@
 import React, { use, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isAuthenticated, setAuthenticated } from '../features/user/userSlice';
-import { getCards } from '../features/cards/cardsSlice';
+import { isLoading } from '../features/cards/cardsSlice';
 import './App.css';
 import Cards from '../features/cards/Cards';
 import Login from '../features/user/Login';
 
-import cardMedia from '../data/assets/card-image.jpg';
-import profilePic from '../data/assets/morty.jpg';
+
 
 
 const clientID = process.env.REACT_APP_CLIENT_ID;
@@ -36,6 +35,7 @@ function App() {
   
   const authenticated = useSelector(isAuthenticated);
   const dispatch = useDispatch();
+  const loading = useSelector(isLoading);
 
 
   useEffect(() => {
@@ -83,21 +83,24 @@ function App() {
       
   }, [dispatch]);
 
-  if (!localStorage.getItem('token')) {
+  /*
+  if (loading) {
 
     return (
-      <Login />
+      <div className="App">
+        <h1>Loading...</h1>
+      </div>
     )
 
   } else {
-
+*/
     return (
       <div className="App">
         <Cards />
       </div>
     );
   }
-}
+
 
 export default App;
 

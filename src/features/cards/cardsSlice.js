@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const getCards = createAsyncThunk(
     'cards/getCards',
     async () => {
-        const response = await fetch('https://oauth.reddit.com/rising?before=t5_1?limit=10', 
+        const response = await fetch('https://oauth.reddit.com/best?before=t5_1?limit=10', 
             {
                 headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` },   
             }
@@ -50,3 +50,5 @@ export const cardsSlice = createSlice({
 export default cardsSlice.reducer;
 
 export const selectCards = (state) => state.cards.cards;
+
+export const isLoading = (state) => state.cards.isLoading;

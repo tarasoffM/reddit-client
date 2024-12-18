@@ -4,6 +4,27 @@ import { getCards } from './cardsSlice';
 
 export default function Card({cardMedia, profilePic, cardTitle}) {
 
+    if (cardMedia === null) {
+        return (
+        <div className='card'>
+            <div className='card-header'>
+                <div className='avatar'>
+                    <img src={profilePic} alt='placeholder' />
+                </div>
+                <h2>header</h2>
+            </div>
+            <div className='card-container'>                
+                <div className='content-buttons'>
+                    <button className='like-buttons'>left button</button>
+                    <button className='like-buttons'>right button</button>
+                </div>
+                <div className='card-text'>
+                    <p>{cardTitle}</p>
+                </div>
+            </div>
+        </div>
+    );}
+    
     return (
         <div className='card'>
             <div className='card-header'>
@@ -24,8 +45,6 @@ export default function Card({cardMedia, profilePic, cardTitle}) {
                     <p>{cardTitle}</p>
                 </div>
             </div>
-          
-
         </div>
     );
 }
