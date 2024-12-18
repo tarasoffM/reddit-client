@@ -34,7 +34,9 @@ export default function Cards () {
                     key={index} 
                     cardMedia={getUrl(imageUrl) ? getUrl(imageUrl) : null} 
                     profilePic={card.thumbnail} 
-                    cardTitle={card.title} 
+                    cardTitle={card.title}
+                    cardComments={card.comments}
+                    cardUps={card.ups} 
                     /> );
     })}
         </>    

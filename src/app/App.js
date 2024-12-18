@@ -43,42 +43,44 @@ function App() {
     const credentials = btoa(`${clientID}:${clientSecret}`);
     let code = new URLSearchParams(queryString).get('code');
 
-    if (code) {
-      localStorage.setItem('code', code);
-      // remove the code from the URL
-      window.history.pushState('', '', REDIRECTURI);
-    } else {
-      code = localStorage.getItem('code');
-    }
+    if (!localStorage.getItem('token')) {
+      if (code) {
+        localStorage.setItem('code', code);
+        // remove the code from the URL
+        window.history.pushState('', '', REDIRECTURI);
+      } else {
+        code = localStorage.getItem('code');
+      }
 
-    if (code) {
-      // Exchange the code for an access token
-      fetch('https://www.reddit.com/api/v1/access_token', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Basic ${credentials}`
-        },
-        body: new URLSearchParams({
-          grant_type: 'authorization_code',
-          code: code,
-          redirect_uri: REDIRECTURI
+      if (code) {
+        // Exchange the code for an access token
+        fetch('https://www.reddit.com/api/v1/access_token', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Basic ${credentials}`
+          },
+          body: new URLSearchParams({
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: REDIRECTURI
+          })
         })
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(data => {
-        localStorage.setItem('token', data.access_token);
-        dispatch(setAuthenticated(true));
-      })
-      .catch(error => {
-        console.error('Error fetching access token:', error);
-      });
-    } else {
-      window.location.href = userAuthorizationRedirect;
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          localStorage.setItem('token', data.access_token);
+          dispatch(setAuthenticated(true));
+        })
+        .catch(error => {
+          console.error('Error fetching access token:', error);
+        });
+      } else {
+        window.location.href = userAuthorizationRedirect;
+      }
     }
       
   }, [dispatch]);

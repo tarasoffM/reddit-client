@@ -30,7 +30,7 @@ code {
   align-items: center;
   max-height: 10%;
   border-bottom: 2px solid #4b4b4b;
-  background-color: #e9e5e5;
+  background-color: #dedce7;
 } 
 
 .avatar img {
@@ -53,8 +53,9 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1%;
+  padding: 1% 3%;
   border-top: 2px solid #383838;
+  color: #38383875;
 }
 
 .left-buttons {
@@ -70,8 +71,13 @@ code {
 }
 
 .right-buttons p {
-  margin-left: 10px;
-  color: #383838;
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.left-buttons p {
+  margin: 0 10px;
   font-weight: bold;
   font-size: 1.2em;
 }

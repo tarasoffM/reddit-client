@@ -40,7 +40,10 @@ export const cardsSlice = createSlice({
                         title: card.data.title ? card.data.title : '', 
                         url: card.data.url ? card.data.url : '', 
                         thumbnail: card.data.thumbnail ? card.data.thumbnail : '', 
-                        preview: card.data.preview ? card.data.preview : ''};
+                        preview: card.data.preview ? card.data.preview : '',
+                        comments: card.data.num_comments ? card.data.num_comments : 0,
+                        ups: card.data.ups ? card.data.ups : 0,
+                    };
                     state.cards.push(entry);
                 });
             });

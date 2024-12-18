@@ -1,11 +1,11 @@
 import { React } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCards } from './cardsSlice';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 
-export default function Card({cardMedia, profilePic, cardTitle}) {
+export default function Card({cardMedia, profilePic, cardTitle, cardUps, cardComments}) {
 
     if (cardMedia === null) {
         return (
@@ -19,13 +19,13 @@ export default function Card({cardMedia, profilePic, cardTitle}) {
             <div className='card-container'>                
                 <div className='content-buttons'>
                     <div className='left-buttons'>
-                        <KeyboardArrowUpIcon />
-                        <p>0</p>
-                        <KeyboardArrowDownIcon />
+                        <ThumbUpIcon />
+                        <p>{cardUps}</p>
+                        <ThumbDownIcon />
                     </div>
                     <div className='right-buttons'>
-                        <ModeCommentOutlinedIcon />
-                        <p>0</p>
+                        <p>{cardComments}</p>
+                        <ChatBubbleIcon />                        
                     </div>
                 </div>
                 <div className='card-text'>
@@ -49,14 +49,14 @@ export default function Card({cardMedia, profilePic, cardTitle}) {
                 </div>
                 <div className='content-buttons'>
                     <div className='left-buttons'>
-                            <KeyboardArrowUpIcon />
-                            <p>0</p>
-                            <KeyboardArrowDownIcon />
-                        </div>
-                        <div className='right-buttons'>
-                            <ModeCommentOutlinedIcon />
-                            <p>0</p>
-                        </div>
+                        <ThumbUpIcon />
+                        <p>{cardUps}</p>
+                        <ThumbDownIcon />
+                    </div>
+                    <div className='right-buttons'>
+                        <p>{cardComments}</p>
+                        <ChatBubbleIcon />                        
+                    </div>
                 </div>
                 <div className='card-text'>
                     <p>{cardTitle}</p>
