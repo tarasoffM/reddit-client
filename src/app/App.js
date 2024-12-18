@@ -1,10 +1,8 @@
-import React, { use, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { isAuthenticated, setAuthenticated } from '../features/user/userSlice';
-import { isLoading } from '../features/cards/cardsSlice';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setAuthenticated } from '../features/user/userSlice';
 import './App.css';
 import Cards from '../features/cards/Cards';
-import Login from '../features/user/Login';
 
 
 
@@ -33,9 +31,9 @@ const userAuthorizationRedirect =
 
 function App() {
   
-  const authenticated = useSelector(isAuthenticated);
+  // const authenticated = useSelector(isAuthenticated);
   const dispatch = useDispatch();
-  const loading = useSelector(isLoading);
+  // const loading = useSelector(isLoading);
 
 
   useEffect(() => {

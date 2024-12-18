@@ -35,7 +35,7 @@ export const cardsSlice = createSlice({
             .addCase(getCards.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.loadError = false;
-                action.payload.data.children.map((card) => {
+                const cards = action.payload.data.children.map((card) => {
                     const entry = { 
                         title: card.data.title ? card.data.title : '', 
                         url: card.data.url ? card.data.url : '', 
@@ -44,8 +44,10 @@ export const cardsSlice = createSlice({
                         comments: card.data.num_comments ? card.data.num_comments : 0,
                         ups: card.data.ups ? card.data.ups : 0,
                     };
-                    state.cards.push(entry);
+                    //state.cards.push(entry);
+                    return entry;
                 });
+                state.cards = cards;
             });
     }
 });

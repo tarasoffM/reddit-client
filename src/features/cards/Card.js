@@ -1,6 +1,4 @@
 import { React } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCards } from './cardsSlice';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
