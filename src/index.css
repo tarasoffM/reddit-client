@@ -53,8 +53,27 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 10px;
+  padding: 0 1%;
   border-top: 2px solid #383838;
+}
+
+.left-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.right-buttons p {
+  margin-left: 10px;
+  color: #383838;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .card-text {
